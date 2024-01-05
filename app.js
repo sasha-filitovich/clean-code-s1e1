@@ -114,7 +114,11 @@ var taskCompleted = function () {
 
   //Append the task list item to the #completed-tasks
   var listItem = this.parentNode;
-  listItem.querySelector('.item-box__label').classList.add('item-box__label_completed');
+  if (listItem.querySelector('.item-box__label')) {
+    listItem.querySelector('.item-box__label').classList.add('item-box__label_completed');
+  } else {
+    listItem.querySelector('.item-box__label_edit').classList.add('item-box__label_completed');
+  }
   completedTasksHolder.appendChild(listItem);
   bindTaskEvents(listItem, taskIncomplete);
 };
@@ -125,7 +129,11 @@ var taskIncomplete = function () {
   //When the checkbox is unchecked
   //Append the task list item to the #incompleteTasks.
   var listItem = this.parentNode;
-  listItem.querySelector('.item-box__label').classList.remove('item-box__label_completed');
+  if (listItem.querySelector('.item-box__label')) {
+    listItem.querySelector('.item-box__label').classList.remove('item-box__label_completed');
+  } else {
+    listItem.querySelector('.item-box__label_edit').classList.remove('item-box__label_completed');
+  }
 
   incompleteTaskHolder.appendChild(listItem);
   bindTaskEvents(listItem, taskCompleted);
